@@ -40,7 +40,10 @@ function addC() {
 
 //Removes a row
 function removeR() {
-    alert("Clicked Remove Row")
+    let grid = document.getElementById("grid");
+    grid.removeChild(grid.lastElementChild);
+    
+
 }
 //Remove a column
 function removeC() {
