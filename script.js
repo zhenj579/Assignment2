@@ -61,6 +61,12 @@ function selected(){
 
 function fill(){
     alert("Clicked Fill All")
+    let test = document.getElementsByTagName("td")
+    colorSelected = document.getElementById("selectedID").value;
+    colorSelected = colorSelected.toLowerCase()
+    for(var i =0;i<test.length;i++){
+        test[i].style.backgroundColor = colorSelected;
+    }
 }
 
 function clearAll(){
@@ -68,8 +74,6 @@ function clearAll(){
     let test = document.getElementsByTagName("td")
     for(var i =0;i<test.length;i++){
         test[i].style.backgroundColor = "white";
-
-        
     }
 }
 
