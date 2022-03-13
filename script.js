@@ -79,4 +79,13 @@ function clearAll(){
 
 function fillU(){
     alert("Clicked Fill All Uncolored")
+    let test = document.getElementsByTagName("td")
+    colorSelected = document.getElementById("selectedID").value;
+    colorSelected = colorSelected.toLowerCase()
+    for(var i =0;i<test.length;i++){
+        if(test[i].style.backgroundColor == "white" || test[i].style.backgroundColor == ""){
+            test[i].style.backgroundColor = colorSelected;
+        }
+        
+    }
 }
