@@ -1,28 +1,41 @@
 let colorSelected; 
+var row_length = 1;
 
 //Adds a row
 function addR() {
     //alert("Clicked Add Row")
     let grid = document.getElementById("grid");
     let rows = document.getElementsByTagName("tr");
-    console.log(rows.length);
-    
-    if (rows.length === 0) {
-        let row = document.createElement("tr");
+    // console.log(rows.length);
+
+    let row = document.createElement("tr");
+
+    let current_row_length = row.getElementsByTagName("td").length;
+    while(current_row_length < row_length)
+    {
         let col = document.createElement("td");
         col.onclick = function (){
             this.style.backgroundColor = colorSelected;
         };
         row.appendChild(col);
-        grid.appendChild(row);
-
+        current_row_length++;
     }
+    grid.appendChild(row);
+
 }
 //Adds a column
 function addC() {
     //alert("Clicked Add Col")
-    let cols = document.getElementsByTagName("td");
-    console.log(cols.length); 
+    let rows = document.querySelectorAll("tr");
+    rows.forEach((row) => 
+    {
+        let col = document.createElement("td");
+        col.onclick = function (){
+            this.style.backgroundColor = colorSelected;
+        };
+        row.appendChild(col);
+    });
+    row_length++;
 }
 
 //Removes a row
