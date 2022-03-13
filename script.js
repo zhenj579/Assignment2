@@ -45,6 +45,10 @@ function fill(){
 
 function clearAll(){
     alert("Clicked Clear All")
+    let test = document.getElementsByTagName("td")
+    for(var i =0;i<test.length;i++){
+        test[i].style.backgroundColor = "white";
+    }
 }
 
 function fillU(){
