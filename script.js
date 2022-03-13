@@ -42,12 +42,16 @@ function addC() {
 function removeR() {
     let grid = document.getElementById("grid");
     grid.removeChild(grid.lastElementChild);
-    
-
 }
 //Remove a column
 function removeC() {
-    alert("Clicked Remove Col")
+    let grid = document.getElementById("grid");
+    let rows = grid.getElementsByTagName("tr");
+    for (let row of rows)
+    {
+        row.removeChild(row.lastElementChild);
+    }
+    row_length--;
 }
 //sets global var for selected color
 function selected(){
