@@ -1,31 +1,38 @@
 let colorSelected; 
-var row_length = 1;
+function getCols() {
+    let rows = document.getElementsByTagName("tr");
+    let last_row = rows.item(rows.length-1);
+    if(last_row === null)
+    {
+        return 1;
+    }
+    let cols = last_row.getElementsByTagName("td");
+    return cols.length;
+}
+
+function grid_has_row() {
+    let grid = document.getElementById("grid");
+    let rows = grid.getElementsByTagName("tr");
+    return rows.length > 0;
+}
 
 //Adds a row
 function addR() {
-    //alert("Clicked Add Row")
     let grid = document.getElementById("grid");
-    let rows = document.getElementsByTagName("tr");
-    // console.log(rows.length);
-
     let row = document.createElement("tr");
-
-    let current_row_length = row.getElementsByTagName("td").length;
-    while(current_row_length < row_length)
+    let num_cols = getCols(grid);
+    for(let i = 0; i < num_cols; i++)
     {
         let col = document.createElement("td");
         col.onclick = function (){
             this.style.backgroundColor = colorSelected;
         };
         row.appendChild(col);
-        current_row_length++;
     }
     grid.appendChild(row);
-
 }
 //Adds a column
 function addC() {
-    //alert("Clicked Add Col")
     let rows = document.querySelectorAll("tr");
     rows.forEach((row) => 
     {
@@ -35,53 +42,69 @@ function addC() {
         };
         row.appendChild(col);
     });
-    row_length++;
 }
 
 //Removes a row
 function removeR() {
     let grid = document.getElementById("grid");
-    grid.removeChild(grid.lastElementChild);
+    if(grid_has_row())
+        grid.removeChild(grid.lastElementChild);
+    else
+        alert("no rows to remove");
 }
 //Remove a column
 function removeC() {
     let grid = document.getElementById("grid");
     let rows = grid.getElementsByTagName("tr");
-    for (let row of rows)
+    if(rows !== null && rows[rows.length-1] !== undefined && rows[rows.length-1].childElementCount > 1)
     {
-        row.removeChild(row.lastElementChild);
+        for (let row of rows)
+        {
+            row.removeChild(row.lastElementChild);
+        }
     }
-    row_length--;
+    else if(rows !== null && rows[rows.length-1] !== undefined && rows[rows.length-1].childElementCount == 1)
+    {
+        for(let row of grid.querySelectorAll("tr"))
+        {
+            grid.removeChild(row);
+        }
+    }
+    else
+    {
+        alert("no cols to remove");
+    }
+
+
 }
 //sets global var for selected color
 function selected(){
     colorSelected = document.getElementById("selectedID").value;
-    console.log(colorSelected);
 }
 
 function fill(){
-    let test = document.getElementsByTagName("td")
+    let cells = document.getElementsByTagName("td")
     colorSelected = document.getElementById("selectedID").value;
     colorSelected = colorSelected.toLowerCase()
-    for(var i =0;i<test.length;i++){
-        test[i].style.backgroundColor = colorSelected;
+    for(let i =0;i<cells.length;i++){
+        cells[i].style.backgroundColor = colorSelected;
     }
 }
 
 function clearAll(){
-    let test = document.getElementsByTagName("td")
-    for(var i =0;i<test.length;i++){
-        test[i].style.backgroundColor = "white";
+    let cells = document.getElementsByTagName("td")
+    for(let i =0;i<cells.length;i++){
+        cells[i].style.backgroundColor = "white";
     }
 }
 
 function fillU(){
-    let test = document.getElementsByTagName("td")
+    let cells = document.getElementsByTagName("td")
     colorSelected = document.getElementById("selectedID").value;
     colorSelected = colorSelected.toLowerCase()
-    for(var i =0;i<test.length;i++){
-        if(test[i].style.backgroundColor == "white" || test[i].style.backgroundColor == ""){
-            test[i].style.backgroundColor = colorSelected;
+    for(let i =0;i<cells.length;i++){
+        if(cells[i].style.backgroundColor == "white" || cells[i].style.backgroundColor == ""){
+            cells[i].style.backgroundColor = colorSelected;
         }
         
     }
